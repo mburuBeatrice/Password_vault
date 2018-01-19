@@ -1,3 +1,4 @@
+import pyperclip
 class User:
 
     """
@@ -72,3 +73,8 @@ class User:
         method that returns the user list
         '''
         return cls.user_list
+
+    @classmethod
+    def copy_email(cls,number):
+        user_found = User.find_by_number(number)
+        pyperclip.copy(user_found.email)
