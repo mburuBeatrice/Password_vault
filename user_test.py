@@ -25,7 +25,7 @@ class TestUser(unittest.TestCase):
 
         self.assertEqual(self.new_user.first_name,"betty")
         self.assertEqual(self.new_user.last_name,"njonjo")
-        self.assertEqual(self.new_user.phone_number,"0710283947")
+        self.assertEqual(self.new_user.number,"0710283947")
         self.assertEqual(self.new_user.email,"shishnjonjo@gmail.com")
 
     def tearDown(self):
@@ -63,16 +63,28 @@ class TestUser(unittest.TestCase):
         self.new_user.delete_user()#Deleting a user object
         self.assertEqual(len(User.user_list),1)
 
-    def test_user_exists(self):
-        """
-        test to check whether we can return a Boolean if we cannot find the user
-        """
+    def test_find_user_by_number(self):
+        '''
+        test to check if we can find a user by phone number and display information
+        '''
+
         self.new_user.save_user()
-        test_user = User("Test","user","0710283947","test@user.com") #new user
+        test_user = User("Test","user","0710283947","test@user.com") # new user
         test_user.save_user()
 
-        user_exists = User.user_exists("0710283947")
-        self.assertTrue(user_exists)
+        found_user = User.find_by_number("0710283947")
+
+        self.assertEqual(found_user.email,test_user.email)
+    # def test_user_exists(self):
+    #     """
+    #     test to check whether we can return a Boolean if we cannot find the user
+    #     """
+    #     self.new_user.save_user()
+    #     test_user = User("Test","user","0710283947","test@user.com") #new user
+    #     test_user.save_user()
+    #
+    #     user_exists = User.user_exists("0710283947")
+    #     self.assertTrue(user_exists)
 
 if __name__ == '__main__':
     unittest.main()

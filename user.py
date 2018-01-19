@@ -5,20 +5,20 @@ class User:
     """
 
     user_list = [] # Empty user list
-    def __init__(self,first_name,last_name,phone_number,email):
+    def __init__(self,first_name,last_name,number,email):
         """
         __init__method helps us define properties for our objects.
 
         Args:
         first_name:New user first name.
         last_name:New user last name.
-        phone_number:New user phone number.
+        number:New user phone number.
         email
         email:New user email address.
         """
         self.first_name = first_name
         self.last_name = last_name
-        self.phone_number = phone_number
+        self.number = number
         self.email = email
 
 
@@ -37,3 +37,17 @@ class User:
         """
 
         User.user_list.remove(self)
+    # @classmethod
+    # def user_exist(cls,number):
+    #     """
+    #     method that checks if a user exists from a user list.
+    #
+    #     Args:
+    #        number: Phone number to search if it exists
+    #     Return:
+    #        Boolean: True or false depending if the contact exists
+    #     """
+    #     for user in cls.user_list:
+    #         if user.phone_number == number
+    #         returns True
+    #     return false
