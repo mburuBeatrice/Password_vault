@@ -69,10 +69,10 @@ class TestUser(unittest.TestCase):
         '''
 
         self.new_user.save_user()
-        test_user = User("Test","user","0710283947","test@user.com") # new user
+        test_user = User("Test","user","0710283974","test@user.com") # new user
         test_user.save_user()
 
-        found_user = User.find_by_number("0710283947")
+        found_user = User.find_by_number("0710283974")
 
         self.assertEqual(found_user.email,test_user.email)
     # def test_user_exists(self):

@@ -37,6 +37,20 @@ class User:
         """
 
         User.user_list.remove(self)
+    @classmethod
+    def find_by_number(cls,number):
+        '''
+        Method that takes in a number and returns a user that matches that number.
+
+        Args:
+            number: Phone number to search for
+        Returns :
+            user that matches the number.
+        '''
+
+        for user in cls.user_list:
+            if user.number == number:
+                return user
     # @classmethod
     # def user_exist(cls,number):
     #     """
@@ -48,6 +62,6 @@ class User:
     #        Boolean: True or false depending if the contact exists
     #     """
     #     for user in cls.user_list:
-    #         if user.phone_number == number
+    #         if user.number == number
     #         returns True
     #     return false
