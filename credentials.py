@@ -1,4 +1,4 @@
-from user import User
+# from user import User
 class Credentials:
 
     """
@@ -16,3 +16,9 @@ class Credentials:
         """
         self.account_name = account_name
         self.password = password
+    def save_credentials(self):
+
+        """
+        save_user method saves user objects into user_list
+        """
+        Credentials.credentials_list.append(self)
