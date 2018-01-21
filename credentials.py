@@ -29,20 +29,20 @@ class Credentials:
         delete_credentials method deletes a saved credentials from the credentials_list
         """
         Credentials.credentials_list.remove(self)
-    # @classmethod
-    # def find_by_account_name(cls,account_name):
-    #     '''
-    #     Method that takes in an account_name and returns a password that matches that number.
-    #
-    #     Args:
-    #         account_name: Account name to search for
-    #     Returns :
-    #         credentials that matches the account name.
-    #     '''
-    #
-    #     for credentials in cls.credentials_list:
-    #         if credentials.account_name == account_name:
-    #             return credentials
+    @classmethod
+    def find_by_account_name(cls,account_name):
+        '''
+        Method that takes in an account_name and returns a password that matches that number.
+
+        Args:
+            account_name: Account name to search for
+        Returns :
+            credentials that matches the account name.
+        '''
+
+        for credentials in cls.credentials_list:
+            if credentials.account_name == account_name:
+                return credentials
     # @classmethod
     # def credentials_exist(cls,account_name):
     #     """

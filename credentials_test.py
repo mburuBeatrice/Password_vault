@@ -59,16 +59,16 @@ class TestCredentials(unittest.TestCase):
 
         self.new_credentials.delete_credentials()#Deleting a credentials object
         self.assertEqual(len(Credentials.credentials_list),1)
-    # def test_find_credentials_by_account_name(self):
-    #     '''
-    #     test to check if we can find a credential by account name and display information
-    #     '''
-    #
-    #     self.new_credentials.save_credentials()
-    #     test_credentials = Credentials("x_account","88888") # new credentials
-    #     test_credentials.save_credentials()
-    #
-    #     found_credentials = Credentials.find_by_account_name("x_account")
+    def test_find_credentials_by_account_name(self):
+        '''
+        test to check if we can find a credential by account name and display information
+        '''
+
+        self.new_credentials.save_credentials()
+        test_credentials = Credentials("x_account","88888") # new credentials
+        test_credentials.save_credentials()
+
+        found_credentials = Credentials.find_by_account_name("x_account")
     # def test_credentials_exist(self):
     #     """
     #     test to check whether we can return a Boolean if we cannot find the credentials
