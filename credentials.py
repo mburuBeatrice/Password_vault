@@ -4,7 +4,10 @@ class Credentials:
     """
     Class that generates new instances of credentials
     """
-
+    def tearDown(self):
+        '''
+        tearDown method that does clean up after each test case has run.
+        '''
     credentials_list= [] # Empty credentials list
     def __init__(self,account_name,password):
         """
