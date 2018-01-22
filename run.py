@@ -1,11 +1,11 @@
 #!/usr/bin/env python3.6
 from user import User
 from credentials import Credentials
-def create_user(fname,lname,phone,email):
+def create_user(name, password):
     """
     Function to create a new user
     """
-    new_user = User(fname,lname,phone,email)
+    new_user = User(name, password)
     return new_user
 
 def save_user(user):
@@ -14,76 +14,145 @@ def save_user(user):
 def delete_user(user):
     user.delete_user()
 
-def find_user(number):
-    return User.find_by_number(number)
-
-def check_existing_users(number):
-    return User.user_exist(number)
+def check_existing_users(name):
+    return User.user_exist(name)
 
 def display_users():
     return User.display_users()
 
-def copy_email(number):
-    return User.copy_email(number)
+def user_log_in(name, password):
+    log_in = User.log_in(name, password)
+    if log_in != False:
+        return User.log_in(name, password)
+def create_credentials(user_password, name, password):
+    new_credentials = Credentials(user_password, name, password)
+    return new_credentials
+
+def save_credentials(credentials):
+    credentials.save_credentials(credentials)
+
+def check_existing_credentials(name):
+    return Credentials.credentials_exist(name)
+
+def display_credentials(password):
+    return Credentials.display_credentials(password)
+
+def create_generated_password(name):
+    password = Credentials.generate_password()
+    return password
+
 
 def main():
-    print("Hello Welcome to your password locker.What is your name?")
-    user_name = input()
-
-    print(f"Hello {user_name}. what would you like to do?")
+    print("Hello, welcome to your password vault.What would you like to do?")
 
     print('\n')
     while True:
-                    print("Use these short codes : cc - create a new user, dc - display users, fc -find a user, ex -exit the user list ")
+                    print("Use these short codes : cu - create a new user, du - display users, li - log in, ex -exit the user list and switch to credentials")
 
                     short_code = input().lower()
-                    if short_code == 'cc':
+                    if short_code == 'cu':
                             print("New User")
                             print("-"*10)
 
-                            print ("First name ....")
-                            f_name = input()
+                            print ("user name ....")
+                            user_name = input()
 
-                            print("Last name ...")
-                            l_name = input()
+                            print("user password ...")
+                            user_password = input()
 
-                            print("Phone number ...")
-                            p_number = input()
-
-                            print("Email address ...")
-                            e_address = input()
-                            save_user(create_user(f_name,l_name,p_number,e_address)) # create and save new contact.
+                            save_user(create_user(user_name,user_password)) # create and save new user.
                             print ('\n')
-                            print(f"New User {f_name} {l_name} created")
+                            print(f" {user_name} user created")
                             print ('\n')
-                    elif short_code == 'dc':
+                    elif short_code == 'du':
                         if display_users():
                             print("Here is a list of all your users")
-                            print('\n')
+                            print("-"*10)
                             for user in display_users():
-                                print(f"{user.first_name} {user.last_name} .....{user.number}")
-                                print('\n')
+                                print(f"{user.user_name}")
+                                print("-"*10)
                         else:
                             print('\n')
                             print("You don't seem to have any users saved yet")
                             print('\n')
 
-                    elif short_code == 'fc':
-                        print("Enter the number you want to search for")
-                        search_number = input()
-                        if check_existing_users(search_number):
-                            search_user = find_user(search_number)
-                            print(f"{search_user.first_name} {search_user.last_name}")
-                            print('-' * 20)
-                            print(f"Phone number.......{search_user.number}")
-                            print(f"Email address.......{search_user.email}")
+                    elif short_code == 'li':
+
+                        print("log into password vault account")
+                        print("Enter the user name")
+                        user_name = input()
+
+                        print("Enter the password")
+                        user_password = input()
+                        if user_log_in(user_name,user_password) == None:
+                            print("\n")
+                            print("No account here,please create one")
+                            print("\n")
                         else:
-                            print("That user does not exist")
+
+                            user_log_in(user_name,user_password)
+                            print("\n")
+
                     elif short_code == "ex":
-                        print("Bye .......")
+                        print("bye.....")
                         break
                     else:
                         print("I really didn't get that.Please use the short codes")
+    while True:
+                    print("Use these short codes : cc - create credentials, dc - display credentials, gp - generate password, ex -exit credentials")
+
+                    short_code = input().lower()
+
+                    if short_code == 'cc':
+
+                        print("\n")
+                        print("New credentials")
+                        print("-"*10)
+
+                        print("Name of credentials..")
+                        credentials_name = input()
+                        save_credentials( Credentials(user_password, (create_generated_password(credentials_name)) ) )
+                        print("\n")
+
+                    elif short_code == "dc":
+                        if display_credentials(user_password):
+                            print("\n")
+                            print(f"{user_name}")
+                            print("-"*10)
+                            for credentials in display_credentials(user_password):
+                                print(f"Account...{crecredentials.credentials_name}")
+                                print(f"password...{crecredentials.credentialscredentials_password}")
+                                print("-"*10)
+                        else:
+                            print("\n")
+                            print("No credentials found")
+                            print("\n")
+                    elif short_code == "gp":
+
+                        print("\n")
+                        print("New credentials")
+                        print("-"*10)
+
+                        print("Credential name is ....")
+                        credentials_name = input()
+
+                        save_credentials(Credentials(user_password,credentials_name,(create_generated_password(credcredentials_name))))
+                        print("\n")
+                        print(f"Credentials for {credentials_name} created and saved")
+
+                    elif short_code == "ex":
+                        print(f"bye{user_name}")
+                        print("\n")
+
+                    else:
+                        print("\n")
+                        print(f"{short_code} doesn't work")
+                        print("\n")
+
+
+
+
+
 
 if __name__ == '__main__':
     main()

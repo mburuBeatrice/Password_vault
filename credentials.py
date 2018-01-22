@@ -1,5 +1,5 @@
 # from user import User
-# import pyperclip
+import pyperclip
 from random import choice #This module generates a credentials_password
 import string#This module also generates a credentials_password
 class Credentials:
@@ -50,7 +50,7 @@ class Credentials:
         Method that takes in an credentials_name and returns a credentials_password that matches that number.
 
         Args:
-            credentials_name: Account name to search for
+            credentials_name: credentials name to search for
         Returns :
             credentials that matches the account name.
         '''
@@ -79,7 +79,7 @@ class Credentials:
         '''
         return cls.credentials_list
 
-    # @classmethod
-    # def copy_email(cls,number):
-    #     user_found = User.find_by_number(number)
-    #     pyperclip.copy(user_found.email)
+    @classmethod
+    def copy_credentials(cls,number):
+        credentials_found = Credentials.find_by_credentials_name(name)
+        pyperclip.copy(credentials_found.name)

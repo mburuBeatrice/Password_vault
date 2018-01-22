@@ -47,7 +47,7 @@ class User:
         '''
 
         for credentials in Credentials.credentials_list:
-            if credential.credential_name == name:
+            if credentials.credentials_name == name:
                 return True
 
         return False
