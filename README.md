@@ -10,7 +10,7 @@ Clone this repository to your local computer. Ensure you have python3.6 installe
 
 Once you launch, You can either create a new user, or login or exit the application. If you choose to create a new account, use cu as the code and follow the prompts. Once logged in, you can:
 
- * 1. create credentials.
+ * 1.create credentials.
  * 2.display saved credentials.
  * 3.generate password
  * 4.exit application
