@@ -21,7 +21,7 @@ Bugs.
 Since there is no database to support the app, once you exit or log out of a session you loose all the credentials and created user. You have to create a new user for every session. You can still use the default login but if you exit the app, you will still loose all the credentials you created.
 
 ## Support and contact details
-Incase you have any issues using this code feel free to contact me through mburubeatricewanjiru@gmail.com or leave a comment here on [GitHub][https://github.com/mburuBeatrice/].
+Incase you have any issues using this code feel free to contact me through [mburubeatricewanjiru@gmail.com] or leave a comment here on [mburuBeatrice][https://github.com].
 
 
 
