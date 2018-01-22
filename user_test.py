@@ -1,6 +1,6 @@
 import unittest # imports unittest module
 from user import User #imports the user Class
-
+from credentials import Credentials#imports the credentials Class
 class TestUser(unittest.TestCase):
 
     """
@@ -15,7 +15,7 @@ class TestUser(unittest.TestCase):
         """
         Set up method to run before each test case.
         """
-        self.new_user = User("betty","njonjo","0710283947","shishnjonjo@gmail.com") # create user object
+        self.new_user = User("betty","donkey1") # create user object
 
     def test_init(self):
 
@@ -23,10 +23,9 @@ class TestUser(unittest.TestCase):
         test_init test case to test if the object is properly initialized
         """
 
-        self.assertEqual(self.new_user.first_name,"betty")
-        self.assertEqual(self.new_user.last_name,"njonjo")
-        self.assertEqual(self.new_user.number,"0710283947")
-        self.assertEqual(self.new_user.email,"shishnjonjo@gmail.com")
+        self.assertEqual(self.new_user.user_name,"betty")
+        self.assertEqual(self.new_user.user_password,"donkey1")
+
 
     def tearDown(self):
         '''
@@ -48,7 +47,7 @@ class TestUser(unittest.TestCase):
         """
 
         self.new_user.save_user()
-        test_user = User("Test","user","0710283947","test@user.com") #new user
+        test_user = User("Test","donkey1") #new user
         test_user.save_user()
         self.assertEqual(len(User.user_list),2)
 
@@ -57,33 +56,42 @@ class TestUser(unittest.TestCase):
         test_delete_user to test if we can remove a user from our user list
         """
         self.new_user.save_user()
-        test_user = User("Test","user","0710283947","test@user.com")#new user
+        test_user = User("Test","donkey1")#new user
         test_user.save_user()
     #
         self.new_user.delete_user()#Deleting a user object
         self.assertEqual(len(User.user_list),1)
 
-    def test_find_user_by_number(self):
+    def test_find_credentials(self):
         '''
-        test to check if we can find a user by phone number and display information
+        test to check if a credential exists
         '''
 
         self.new_user.save_user()
-        test_user = User("Test","user","0710283974","test@user.com") # new user
+        test_user = User("Test","donkey1") # new user
         test_user.save_user()
 
-        found_user = User.find_by_number("0710283974")
+        found_credentials = User.find_credentials("Instagram")
 
-        self.assertEqual(found_user.email,test_user.email)
+        self.assertEqual(found_credentials,False)
+    def test_log_in(self):
+        """
+        Test case to check if a user can log in credentials
+        """
+        self.new_user.save_user()
+        test_user = User("Test","donkey1")
+        test_user.save_user()
+        found_credentials = User.log_in("Test","donkey1")
+        self.assertEqual(found_credentials, Credentials.credentials_list)
     def test_user_exist(self):
         """
         test to check whether we can return a Boolean if we cannot find the user
         """
         self.new_user.save_user()
-        test_user = User("Test","user","0710283974","test@user.com") #new user
+        test_user = User("Test","donkey") #new user
         test_user.save_user()
 
-        user_exist = User.user_exist("0710283974")
+        user_exist = User.user_exist("Test")
         self.assertTrue(user_exist)
 
     def test_display_all_users(self):
@@ -93,4 +101,4 @@ class TestUser(unittest.TestCase):
         self.assertEqual(User.display_users(),User.user_list)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)

@@ -1,4 +1,7 @@
 # from user import User
+# import pyperclip
+from random import choice #This module generates a password
+import string#This module also generates a password
 class Credentials:
 
     """
@@ -63,3 +66,8 @@ class Credentials:
         method that returns the credentials list
         '''
         return cls.credentials_list
+
+    # @classmethod
+    # def copy_email(cls,number):
+    #     user_found = User.find_by_number(number)
+    #     pyperclip.copy(user_found.email)

@@ -1,4 +1,5 @@
-import pyperclip
+
+from credentials import Credentials#import credential module to access an account's credentials
 class User:
 
     """
@@ -6,21 +7,17 @@ class User:
     """
 
     user_list = [] # Empty user list
-    def __init__(self,first_name,last_name,number,email):
+    def __init__(self,user_name,user_password):
         """
         __init__method helps us define properties for our objects.
 
         Args:
-        first_name:New user first name.
-        last_name:New user last name.
-        number:New user phone number.
-        email
-        email:New user email address.
+        user_name:New user first name.
+        user_password:New user last name.
         """
-        self.first_name = first_name
-        self.last_name = last_name
-        self.number = number
-        self.email = email
+        self.user_name = user_name
+        self.user_password = user_password
+
 
 
 
@@ -39,32 +36,52 @@ class User:
 
         User.user_list.remove(self)
     @classmethod
-    def find_by_number(cls,number):
+    def find_credentials(cls,name):
         '''
-        Method that takes in a number and returns a user that matches that number.
+        Method that takes in a name and checks corresponding credentials.
 
         Args:
-            number: Phone number to search for
+            name: credentials name to search for
         Returns :
-            user that matches the number.
+        Boolean: returns true/false if the credentials exists
         '''
 
+        for credentials in Credentials.credentials_list:
+            if credential.credential_name == name:
+                return True
+
+        return False
+    @classmethod
+    def log_in(cls, name, password):
+        """
+        method that allows user to log into credentials
+
+        Args:
+        name:nameof the user
+        password:password of the user
+
+        Returns:
+        Credentials listfor the user that matches the name and password
+        False:name or password is incorrect
+        """
         for user in cls.user_list:
-            if user.number == number:
-                return user
+            if user.user_name == name and user.user_password == password:
+                return Credentials.credentials_list
+        return False
+
 
     @classmethod
-    def user_exist(cls,number):
+    def user_exist(cls,name):
         """
         method that checks if a user exists from a user list.
 
         Args:
-           number: Phone number to search if it exists
+           name: user name to search if it exists
         Return:
            Boolean: True or false depending if the contact exists
         """
         for user in cls.user_list:
-            if user.number == number:
+            if user.user_name == name:
                 return True
         return false
     @classmethod
@@ -73,8 +90,3 @@ class User:
         method that returns the user list
         '''
         return cls.user_list
-
-    @classmethod
-    def copy_email(cls,number):
-        user_found = User.find_by_number(number)
-        pyperclip.copy(user_found.email)
