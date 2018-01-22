@@ -111,7 +111,8 @@ def main():
 
                         print("Name of credentials..")
                         credentials_name = input()
-                        save_credentials( Credentials(user_password, (create_generated_password(credentials_name)) ) )
+                        save_credentials(create_credentials(credentials_name, credentials_password))
+                        # save_credentials( Credentials(user_password,  (create_generated_password(credentials_name)) ) )
                         print("\n")
 
                     elif short_code == "dc":
