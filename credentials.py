@@ -1,23 +1,25 @@
 # from user import User
 # import pyperclip
-from random import choice #This module generates a password
-import string#This module also generates a password
+from random import choice #This module generates a credentials_password
+import string#This module also generates a credentials_password
 class Credentials:
 
     """
     Class that generates new instances of credentials
     """
 
-    def __init__(self,account_name,password):
+    def __init__(self,user_password,credentials_name,credentials_password):
         """
         __init__method helps us define properties for our objects.
 
         Args:
-        name:New credentials account name.
-        password:New credentials password.
+        user_password:password of the user
+        credentials_name:New credentials credentials_name.
+        credentials_password:New credentials credentials_password.
         """
-        self.account_name = account_name
-        self.password = password
+        self.user_password = user_password
+        self.credentials_name = credentials_name
+        self.credentials_password = credentials_password
 
     credentials_list= [] # Empty credentials list
     def save_credentials(self):
@@ -33,31 +35,41 @@ class Credentials:
         """
         Credentials.credentials_list.remove(self)
     @classmethod
-    def find_by_account_name(cls,account_name):
+    def generate_password(self):
+        """
+        method that generates a random alphanumeric password
+        """
+        size = 7 #length of generated password
+        alphanum = string.ascii_uppercase + string.digits + string.ascii_lowercase #generate random alphanumeric
+        password = ''.join(choice(alphanum) for num in range(size))
+        return password
+
+    @classmethod
+    def find_by_credentials_name(cls,name):
         '''
-        Method that takes in an account_name and returns a password that matches that number.
+        Method that takes in an credentials_name and returns a credentials_password that matches that number.
 
         Args:
-            account_name: Account name to search for
+            credentials_name: Account name to search for
         Returns :
             credentials that matches the account name.
         '''
 
         for credentials in cls.credentials_list:
-            if credentials.account_name == account_name:
+            if credentials.credentials_name == name:
                 return credentials
     @classmethod
-    def credentials_exist(cls,account_name):
+    def credentials_exist(cls,name):
         """
         method that checks if a credential exists from a credentials list.
 
         Args:
-           account_name: account name to search if it exists
+           credentials_name: account name to search if it exists
         Return:
            Boolean: True or false depending if the credentials exists
         """
         for credentials in cls.credentials_list:
-            if credentials.account_name == account_name:
+            if credentials.credentials_name == name:
                 return True
         return false
     @classmethod

@@ -15,16 +15,16 @@ class TestCredentials(unittest.TestCase):
         """
         Set up method to run before each test case.
         """
-        self.new_credentials = Credentials("instagram","boo6254") # create credentials object
+        self.new_credentials = Credentials("betty","instagram","boo6254") # create credentials object
 
     def test_init(self):
 
         """
         test_init test case to test if the object is properly initialized
         """
-
-        self.assertEqual(self.new_credentials.account_name,"instagram")
-        self.assertEqual(self.new_credentials.password,"boo6254")
+        self.assertEqual(self.new_credentials.user_password,"betty")
+        self.assertEqual(self.new_credentials.credentials_name,"instagram")
+        self.assertEqual(self.new_credentials.credentials_password,"boo6254")
     def tearDown(self):
         '''
         tearDown method that does clean up after each test case has run.
@@ -45,7 +45,7 @@ class TestCredentials(unittest.TestCase):
         """
 
         self.new_credentials.save_credentials()
-        test_credentials = Credentials("facebook","donkey124") #new credentials
+        test_credentials = Credentials("shiru","facebook","donkey124") #new credentials
         test_credentials.save_credentials()
         self.assertEqual(len(Credentials.credentials_list),2)
 
@@ -54,27 +54,34 @@ class TestCredentials(unittest.TestCase):
         test_delete_credentials to test if we can remove a credentials from our credentials list
         """
         self.new_credentials.save_credentials()
-        test_credentials = Credentials("account_name","password")#new credentials
+        test_credentials = Credentials("user_password","credentials_name","credentials_password")#new credentials
         test_credentials.save_credentials()
 
         self.new_credentials.delete_credentials()#Deleting a credentials object
         self.assertEqual(len(Credentials.credentials_list),1)
-    def test_find_credentials_by_account_name(self):
+    def test_generate_password(self):
+        """
+        test if a user can log in
+        """
+        generated_password = self.new_credentials.generate_password()
+        self.assertEqual(len(generated_password), 7)
+
+    def test_find_credentials_by_credentials_name(self):
         '''
         test to check if we can find a credential by account name and display information
         '''
 
         self.new_credentials.save_credentials()
-        test_credentials = Credentials("x_account","88888") # new credentials
+        test_credentials = Credentials("cookie","x_account","88888") # new credentials
         test_credentials.save_credentials()
 
-        found_credentials = Credentials.find_by_account_name("x_account")
+        found_credentials = Credentials.find_by_credentials_name("x_account")
     def test_credentials_exist(self):
         """
         test to check whether we can return a Boolean if we cannot find the credentials
         """
         self.new_credentials.save_credentials()
-        test_credentials = Credentials("x_account","88888") #new credentials
+        test_credentials = Credentials("cookie","x_account","88888") #new credentials
         test_credentials.save_credentials()
 
         credentials_exist = Credentials.credentials_exist("x_account")
@@ -87,4 +94,4 @@ class TestCredentials(unittest.TestCase):
         self.assertEqual(Credentials.display_credentials(),Credentials.credentials_list)
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(verbosity=2)
